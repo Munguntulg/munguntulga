@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #0b1120;
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      #glow {
+        position: absolute;
+        left: 140px;
+        top: 560px;
+        width: 800px;
+        height: 800px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(34, 197, 94, 0.35) 0%, rgba(34, 197, 94, 0) 70%);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="9"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div id="glow"></div>
+
+      <div
+        id="done-slot"
+        data-composition-id="done"
+        data-composition-src="compositions/done.html"
+        data-start="0"
+        data-duration="4.6"
+        data-track-index="0"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <div
+        id="voice-slot"
+        data-composition-id="voice"
+        data-composition-src="compositions/voice.html"
+        data-start="4.6"
+        data-duration="4.4"
+        data-track-index="1"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <!-- Narration; regenerate with scripts/voiceover.sh against a running VoiceStudio -->
+      <audio
+        id="voiceover"
+        src="assets/voiceover.mp3"
+        data-start="0.4"
+        data-duration="8.4"
+        data-track-index="2"
+        data-volume="1"
+      ></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#glow", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, 0);
+      tl.to("#glow", { opacity: 0.5, duration: 0.8 }, 8.0);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

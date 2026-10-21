@@ -2,4 +2,7 @@
     <string name="app_name">task</string>
     <string name="all_task_completed">All task completed</string>
     <string name="nice_work">Nice work!</string>
+    <string name="read_aloud">Read aloud</string>
+    <string name="spoken_by_voicestudio">Voice: VoiceStudio</string>
+    <string name="spoken_by_device">Voice: device (VoiceStudio is offline)</string>
 </resources>

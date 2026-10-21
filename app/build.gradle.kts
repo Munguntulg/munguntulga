@@ -16,6 +16,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // VoiceStudio backend for "Read aloud". 10.0.2.2 is the host machine from the
+        // emulator. Override in ~/.gradle/gradle.properties (never commit an API key).
+        buildConfigField("String", "VOICESTUDIO_URL", gradleString("voicestudio.url", "http://10.0.2.2:3900"))
+        buildConfigField("String", "VOICESTUDIO_VOICE", gradleString("voicestudio.voice", "default"))
+        buildConfigField("String", "VOICESTUDIO_API_KEY", gradleString("voicestudio.apiKey", ""))
     }
 
     buildTypes {
@@ -36,6 +42,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -57,3 +64,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
+fun gradleString(name: String, default: String): String =
+    "\"" + providers.gradleProperty(name).getOrElse(default) + "\""
