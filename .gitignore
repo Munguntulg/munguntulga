@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# HyperFrames promo video (rendered output and check artifacts)
+/promo/renders
+/promo/.hyperframes
+/promo/node_modules

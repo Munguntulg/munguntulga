@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        #done {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 40px;
+          padding: 0 96px;
+          text-align: center;
+          color: #f8fafc;
+          font-family: ui-sans-serif, system-ui, sans-serif;
+        }
+        #done-check {
+          display: block;
+          width: 420px;
+          height: 398px;
+        }
+        #done-title {
+          display: block;
+          font-size: 96px;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          line-height: 1.05;
+        }
+        #done-sub {
+          display: block;
+          font-size: 56px;
+          font-weight: 500;
+          color: #86efac;
+        }
+      </style>
+
+      <!-- The app's "all done" screen -->
+      <div id="done" data-composition-id="done" data-width="1080" data-height="1920">
+        <img id="done-check" src="assets/ic_task_completed.png" alt="" />
+        <span id="done-title">All task completed</span>
+        <span id="done-sub">Nice work!</span>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#done-check", { opacity: 0, scale: 0.4, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.8)" }, 0.2);
+        tl.fromTo("#done-title", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.9);
+        tl.fromTo("#done-sub", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.4);
+        tl.to(["#done-check", "#done-title", "#done-sub"], { opacity: 0, y: -80, duration: 0.4, stagger: 0.05, ease: "power2.in" }, 4.1);
+        window.__timelines["done"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

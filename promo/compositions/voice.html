@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        #voice {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 40px;
+          padding: 0 96px;
+          text-align: center;
+          color: #f8fafc;
+          font-family: ui-sans-serif, system-ui, sans-serif;
+        }
+        #voice-kicker {
+          display: block;
+          font-size: 44px;
+          font-weight: 600;
+          color: #cbd5e1;
+          letter-spacing: 0.02em;
+        }
+        #voice-wave {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          height: 160px;
+        }
+        #voice-wave span {
+          display: block;
+          width: 28px;
+          height: 160px;
+          border-radius: 14px;
+          background: #22c55e;
+        }
+        #voice-title {
+          display: block;
+          font-size: 96px;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+        }
+        #voice-credit {
+          display: block;
+          font-size: 36px;
+          color: #94a3b8;
+        }
+      </style>
+
+      <!-- The app now reads it aloud -->
+      <div id="voice" data-composition-id="voice" data-width="1080" data-height="1920">
+        <span id="voice-kicker">Now it talks back</span>
+        <div id="voice-wave">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span id="voice-title">Read aloud</span>
+        <span id="voice-credit">Voice by VoiceStudio · Video by HyperFrames</span>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#voice-kicker", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+        tl.fromTo("#voice-wave span", { scaleY: 0.1 }, { scaleY: 1, duration: 0.4, stagger: 0.05, ease: "power2.out" }, 0.3);
+        tl.to("#voice-wave span", { scaleY: 0.35, duration: 0.3, stagger: { each: 0.06, repeat: 9, yoyo: true }, ease: "sine.inOut" }, 0.8);
+        tl.fromTo("#voice-title", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, 0.7);
+        tl.fromTo("#voice-credit", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.6);
+        window.__timelines["voice"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
